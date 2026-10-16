@@ -41,4 +41,14 @@
   - Cleaned up `js/data.js` and updated filter logic in `js/app.js`.
   - Re-verified automated tests (17/17 passed) and rebuilt production CSS.
 
+- [2026-10-17 01:45] — Version Control Setup
+  - Created `.gitignore` excluding `node_modules/`, logs, and OS caches.
+  - Initialized git repository (`main` branch) and committed initial portfolio release.
+
+- [2026-10-17 01:47] — Remote Repository Connected & Pushed
+  - Connected remote origin `https://github.com/FaizNF/portofolio.git`.
+  - Pushed initial `main` branch upstream to GitHub.
+
+
+
 
