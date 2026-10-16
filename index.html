@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faiz Nur Fakhri | Software Engineer & Full-Stack Developer</title>
+  <meta name="description" content="Engineering portfolio of Faiz Nur Fakhri — Software Engineer specializing in Laravel, Vue.js, PHP, and certified Systems & Network Architecture.">
+  <meta name="author" content="Faiz Nur Fakhri">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Faiz Nur Fakhri — Software Engineer & Full-Stack Developer">
+  <meta property="og:description" content="Production Laravel & Vue.js web systems, BNSP certified Senior Network Technician, 3+ years engineering mentorship.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <!-- Primary Compiled Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Tailwind Fallback (for instant rendering before full compilation) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 min-h-screen selection:bg-blue-600 selection:text-white transition-colors duration-200">
+
+  <div id="app" v-cloak class="relative flex flex-col min-h-screen">
+
+    <!-- Toast Notification -->
+    <transition enter-active-class="transition duration-300 ease-out" enter-from-class="transform translate-y-8 opacity-0" enter-to-class="transform translate-y-0 opacity-100" leave-active-class="transition duration-200 ease-in" leave-from-class="transform translate-y-0 opacity-100" leave-to-class="transform translate-y-8 opacity-0">
+      <div v-if="toast.show" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-neutral-900 text-neutral-100 dark:bg-neutral-100 dark:text-neutral-900 px-4 py-3 rounded-lg shadow-xl border border-neutral-700 dark:border-neutral-300 text-sm font-medium">
+        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        <span>{{ toast.message }}</span>
+      </div>
+    </transition>
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-neutral-950/80 border-b border-neutral-200 dark:border-neutral-800 transition-colors">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        
+        <!-- Brand / Identity -->
+        <a href="#about" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 flex items-center justify-center font-mono font-bold text-sm tracking-tighter transition-transform group-hover:scale-105">
+            FNF
+          </div>
+          <div class="flex flex-col">
+            <span class="font-semibold text-sm tracking-tight text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              Faiz Nur Fakhri
+            </span>
+            <span class="text-[11px] font-mono text-neutral-700 dark:text-neutral-300">
+              Software Engineer
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-neutral-600 dark:text-neutral-400">
+          <a href="#about" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.about }}</a>
+          <a href="#experience" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.experience }}</a>
+          <a href="#projects" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.projects }}</a>
+          <a href="#certifications" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.certifications }}</a>
+          <a href="#skills" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.skills }}</a>
+          <a href="#education" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.education }}</a>
+          <a href="#contact" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.contact }}</a>
+        </nav>
+
+        <!-- Controls: Language, Theme, & CV CTA -->
+        <div class="flex items-center gap-2.5">
+          <!-- Language Segmented Control -->
+          <div class="inline-flex items-center p-0.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-xs font-mono font-semibold">
+            <button 
+              @click="setLang('en')" 
+              :class="currentLang === 'en' ? 'bg-white dark:bg-neutral-800 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'"
+              class="px-2 py-1 rounded transition-all">
+              EN
+            </button>
+            <button 
+              @click="setLang('id')" 
+              :class="currentLang === 'id' ? 'bg-white dark:bg-neutral-800 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'"
+              class="px-2 py-1 rounded transition-all">
+              ID
+            </button>
+          </div>
+
+          <!-- Dark / Light Mode Toggle -->
+          <button 
+            @click="toggleTheme" 
+            class="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+            :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+            <!-- Sun Icon -->
+            <svg v-if="isDark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <!-- Moon Icon -->
+            <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+
+          <!-- Direct Resume Download Button -->
+          <a 
+            :href="currentCvFile" 
+            download 
+            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>{{ t.nav.downloadCv }}</span>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button 
+            @click="mobileMenuOpen = !mobileMenuOpen" 
+            class="md:hidden p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Navigation -->
+      <div v-if="mobileMenuOpen" class="md:hidden border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-4 py-3 space-y-2">
+        <a @click="mobileMenuOpen = false" href="#about" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.about }}</a>
+        <a @click="mobileMenuOpen = false" href="#experience" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.experience }}</a>
+        <a @click="mobileMenuOpen = false" href="#projects" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.projects }}</a>
+        <a @click="mobileMenuOpen = false" href="#certifications" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.certifications }}</a>
+        <a @click="mobileMenuOpen = false" href="#skills" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.skills }}</a>
+        <a @click="mobileMenuOpen = false" href="#education" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.education }}</a>
+        <a @click="mobileMenuOpen = false" href="#contact" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.contact }}</a>
+        <div class="pt-2 border-t border-neutral-200 dark:border-neutral-800 flex gap-2">
+          <a :href="data.profile.cvFiles.en" download class="flex-1 text-center py-2 text-xs font-semibold rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white">CV (EN)</a>
+          <a :href="data.profile.cvFiles.id" download class="flex-1 text-center py-2 text-xs font-semibold rounded bg-blue-600 text-white">CV (ID)</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Flow -->
+    <main class="flex-1">
+
+      <!-- HERO SECTION -->
+      <section id="about" class="relative py-16 sm:py-24 border-b border-neutral-200 dark:border-neutral-800 bg-grid-pattern overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          
+          <!-- Availability Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 text-xs font-mono font-medium mb-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-indicator"></span>
+            <span>{{ data.profile.statusBadge[currentLang] }}</span>
+          </div>
+
+          <!-- Main Header & Headline -->
+          <div class="max-w-3xl">
+            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white mb-4 leading-tight">
+              Faiz Nur Fakhri<span class="text-neutral-400 font-light text-2xl sm:text-3xl">, S.Kom.</span>
+            </h1>
+            <p class="text-lg sm:text-xl font-medium text-blue-600 dark:text-blue-400 mb-6">
+              {{ data.profile.title[currentLang] }} — <span class="text-neutral-600 dark:text-neutral-400 font-normal">{{ data.profile.subtitle[currentLang] }}</span>
+            </p>
+            <p class="text-neutral-700 dark:text-neutral-300 leading-relaxed text-sm sm:text-base mb-8">
+              {{ data.profile.summary[currentLang] }}
+            </p>
+
+            <!-- Quick Action Buttons -->
+            <div class="flex flex-wrap items-center gap-3 mb-10">
+              <a href="#contact" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-all">
+                <span>{{ t.hero.ctaPrimary }}</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+
+              <!-- Dual CV Download Buttons -->
+              <div class="inline-flex rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 shadow-sm overflow-hidden">
+                <a :href="data.profile.cvFiles.en" href="Faiz_Nur_Fakhri_CV.pdf" download class="inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors border-r border-neutral-200 dark:border-neutral-800">
+                  <svg class="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  <span>{{ t.hero.verifiedCvEn }}</span>
+                </a>
+                <a :href="data.profile.cvFiles.id" href="CV_Faiz_Nur_Fakhri_ID.pdf" download class="inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+                  <svg class="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  <span>{{ t.hero.verifiedCvId }}</span>
+                </a>
+              </div>
+
+              <!-- Quick Copy Email Button -->
+              <button @click="copyText(data.profile.email, 'Email')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs sm:text-sm font-medium transition-colors">
+                <svg class="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                <span>{{ t.hero.quickCopyEmail }}</span>
+              </button>
+            </div>
+
+            <!-- Location & Contact Badges -->
+            <div class="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-mono text-neutral-700 dark:text-neutral-300 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>{{ data.profile.location[currentLang] }}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <a :href="'mailto:' + data.profile.email" href="mailto:Faiz.swh@gmail.com" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{{ data.profile.email }}</a>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                <a :href="'tel:' + data.profile.phone" href="tel:+6281318464206" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{{ data.profile.phone }}</a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Highlights Dossier Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+            <div v-for="(h, idx) in data.profile.highlights" :key="idx" class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-sm interactive-card">
+              <div class="font-mono text-2xl font-bold tracking-tight text-neutral-900 dark:text-white mb-1">
+                {{ h.metric }}
+              </div>
+              <div class="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-1.5">
+                {{ h.label[currentLang] }}
+              </div>
+              <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-snug">
+                {{ h.desc[currentLang] }}
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FLAGSHIP SYSTEMS & CASE STUDY SECTION -->
+      <section id="projects" class="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          
+          <div class="max-w-2xl mb-12">
+            <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
+              01 // {{ t.projects.title }}
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-white mb-3">
+              {{ t.projects.title }}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              {{ t.projects.subtitle }}
+            </p>
+          </div>
+
+          <!-- Featured Project 1: PT Rekayasa Engineering Inventory System -->
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 p-6 sm:p-8 mb-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+              <div>
+                <span class="inline-block px-2.5 py-1 rounded bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-mono text-xs font-semibold mb-2">
+                  PT Rekayasa Engineering
+                </span>
+                <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white">
+                  {{ data.projects[0].title[currentLang] }}
+                </h3>
+              </div>
+              <div class="text-right">
+                <span class="font-mono text-xs font-medium text-neutral-500 block">
+                  {{ data.projects[0].period }}
+                </span>
+                <span class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Kemnaker Certified ("Sangat Baik")
+                </span>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 my-6 leading-relaxed">
+              {{ data.projects[0].description[currentLang] }}
+            </p>
+
+            <!-- ARCHITECTURAL SCHEMATIC BREAKDOWN (No AI Slop, pure structural clarity) -->
+            <div class="mb-8 p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500">
+                  {{ t.projects.architectureTitle }}
+                </span>
+                <span class="text-[11px] font-mono text-neutral-400">MVC + Relational Transactions</span>
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+                <!-- Tier 1: Client UI -->
+                <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                  <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">1. Frontend Layer</div>
+                  <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Vue.js SPA Modules</div>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
+                    Dynamic borrowing forms, responsive inventory tables, and instant approval action toggles.
+                  </p>
+                </div>
+
+                <!-- Tier 2: Controller & Guard -->
+                <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                  <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">2. Gateway & Auth</div>
+                  <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Laravel Middleware</div>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
+                    Strict RBAC checking, form request sanitation, and RESTful route orchestration.
+                  </p>
+                </div>
+
+                <!-- Tier 3: Transaction Engine -->
+                <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                  <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">3. Domain Logic</div>
+                  <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Approval Engine</div>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
+                    Real-time stock audit trails, transactional borrowing logs, multi-tier approvals.
+                  </p>
+                </div>
+
+                <!-- Tier 4: Storage -->
+                <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                  <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">4. Persistence</div>
+                  <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">MySQL Database</div>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
+                    Normalized 3NF relational schemas, indexed foreign keys, and ACID consistency.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Impact Points -->
+            <div class="mb-6">
+              <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500 mb-3">
+                {{ t.projects.impactTitle }}
+              </h4>
+              <ul class="space-y-2.5">
+                <li v-for="(pt, pIdx) in data.projects[0].impactPoints[currentLang]" :key="pIdx" class="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
+                  <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <span>{{ pt }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tech Tags -->
+            <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-2">
+              <span v-for="t in data.projects[0].technologies" :key="t" class="px-2.5 py-1 rounded bg-neutral-200/80 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs font-medium">
+                {{ t }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Featured Project 2: ELKOM Laboratory Curriculum & Systems -->
+          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+              <div>
+                <span class="inline-block px-2.5 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-mono text-xs font-semibold mb-2">
+                  ELKOM Laboratory, Universitas Gunadarma
+                </span>
+                <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white">
+                  {{ data.projects[1].title[currentLang] }}
+                </h3>
+              </div>
+              <div class="text-right">
+                <span class="font-mono text-xs font-medium text-neutral-500 block">
+                  {{ data.projects[1].period }}
+                </span>
+                <span class="text-xs font-semibold text-neutral-600 dark:text-neutral-400 mt-1 block">
+                  3+ Consecutive Years Leadership
+                </span>
+              </div>
+            </div>
+
+            <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 my-6 leading-relaxed">
+              {{ data.projects[1].description[currentLang] }}
+            </p>
+
+            <!-- Impact Points -->
+            <div class="mb-6">
+              <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500 mb-3">
+                {{ t.projects.impactTitle }}
+              </h4>
+              <ul class="space-y-2.5">
+                <li v-for="(pt, pIdx) in data.projects[1].impactPoints[currentLang]" :key="pIdx" class="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
+                  <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <span>{{ pt }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tech Tags -->
+            <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-2">
+              <span v-for="t in data.projects[1].technologies" :key="t" class="px-2.5 py-1 rounded bg-neutral-200/80 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs font-medium">
+                {{ t }}
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- WORK EXPERIENCE SECTION -->
+      <section id="experience" class="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/30">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          
+          <div class="max-w-2xl mb-12">
+            <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
+              02 // {{ t.experience.title }}
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-white mb-3">
+              {{ t.experience.title }}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              {{ t.experience.subtitle }}
+            </p>
+          </div>
+
+          <div class="space-y-8">
+            <div v-for="(job, jIdx) in data.workExperience" :key="jIdx" class="p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 interactive-card">
+              
+              <div class="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+                <div>
+                  <h3 class="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white">
+                    {{ job.role[currentLang] }}
+                  </h3>
+                  <div class="text-sm font-medium text-blue-600 dark:text-blue-400">
+                    {{ job.company }} <span class="text-neutral-400 font-normal">| {{ job.location }}</span>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="inline-block px-2.5 py-1 rounded font-mono text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+                    {{ job.period }}
+                  </span>
+                  <div class="text-[11px] font-mono text-neutral-500 mt-1">
+                    {{ job.type }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bullet Points -->
+              <ul class="space-y-2.5 my-5">
+                <li v-for="(p, pIdx) in job.points[currentLang]" :key="pIdx" class="flex items-start gap-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0"></span>
+                  <span class="leading-relaxed">{{ p }}</span>
+                </li>
+              </ul>
+
+              <!-- Skills used -->
+              <div class="pt-4 border-t border-neutral-100 dark:border-neutral-800 flex flex-wrap gap-1.5">
+                <span v-for="s in job.skills" :key="s" class="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-neutral-100 dark:bg-neutral-800/80 text-neutral-600 dark:text-neutral-400">
+                  {{ s }}
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CERTIFICATIONS & PROFESSIONAL LICENSES -->
+      <section id="certifications" class="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          
+          <div class="max-w-2xl mb-12">
+            <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
+              03 // {{ t.certifications.title }}
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-white mb-3">
+              {{ t.certifications.title }}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              {{ t.certifications.subtitle }}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div v-for="cert in data.certifications" :key="cert.id" class="flex flex-col justify-between p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 interactive-card">
+              <div>
+                <!-- Top Verified Badge -->
+                <div class="flex items-center justify-between gap-2 mb-4">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 font-mono text-[11px] font-semibold">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    {{ t.certifications.verifiedBadge }}
+                  </span>
+                  <span class="font-mono text-xs text-neutral-500 font-medium">{{ cert.period }}</span>
+                </div>
+
+                <h3 class="text-base font-bold text-neutral-900 dark:text-white mb-2 leading-snug">
+                  {{ cert.title[currentLang] }}
+                </h3>
+
+                <p class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-3">
+                  {{ cert.issuer }}
+                </p>
+
+                <!-- Registration Number -->
+                <div class="p-2.5 rounded-lg bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 font-mono text-xs mb-4">
+                  <span class="text-neutral-500 block text-[10px] uppercase">{{ t.certifications.regNoLabel }}</span>
+                  <span class="font-semibold text-neutral-800 dark:text-neutral-200">{{ cert.regNo }}</span>
+                </div>
+
+                <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                  {{ cert.description[currentLang] }}
+                </p>
+
+                <!-- Sub-items if any -->
+                <div v-if="cert.items" class="space-y-1.5 mb-4">
+                  <div v-for="it in cert.items" :key="it.name" class="flex items-center justify-between text-xs font-mono py-1 px-2 rounded bg-white dark:bg-neutral-950 border border-neutral-200/60 dark:border-neutral-800/60">
+                    <span class="text-neutral-700 dark:text-neutral-300">{{ it.name }}</span>
+                    <span class="text-neutral-400 font-medium">{{ it.year }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action to open details modal -->
+              <button @click="openCertModal(cert)" class="mt-4 w-full py-2 px-3 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:border-blue-600 dark:hover:border-blue-400 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-medium transition-colors">
+                {{ t.certifications.viewDetails }}
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TECHNICAL SKILLS MATRIX WITH REAL-TIME FILTER -->
+      <section id="skills" class="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/30">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div class="max-w-2xl">
+              <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
+                04 // {{ t.skills.title }}
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-white mb-3">
+                {{ t.skills.title }}
+              </h2>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                {{ t.skills.subtitle }}
+              </p>
+            </div>
+
+            <!-- Real-time Filter Input -->
+            <div class="w-full md:w-80">
+              <div class="relative">
+                <svg class="w-4 h-4 text-neutral-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input 
+                  type="text" 
+                  v-model="searchQuery" 
+                  :placeholder="t.skills.searchPlaceholder"
+                  class="w-full pl-9 pr-4 py-2 text-xs rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all">
+                <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-3 top-2.5 text-xs text-neutral-400 hover:text-neutral-600">✕</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills Grid -->
+          <div v-if="filteredCategories.length > 0" class="space-y-8">
+            <div v-for="(cat, cIdx) in filteredCategories" :key="cIdx" class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+              <h3 class="text-sm font-mono font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-4 pb-2 border-b border-neutral-100 dark:border-neutral-800">
+                {{ cat.name[currentLang] }}
+              </h3>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div v-for="skill in cat.skills" :key="skill.name" class="p-3.5 rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-50/60 dark:bg-neutral-950/60 hover:border-blue-500/50 transition-colors">
+                  <div class="font-semibold text-xs sm:text-sm text-neutral-900 dark:text-white mb-1.5">
+                    {{ skill.name }}
+                  </div>
+                  <p class="text-[11px] text-neutral-500 dark:text-neutral-400 leading-snug">
+                    {{ skill.desc[currentLang] }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div v-else class="text-center py-12 border border-dashed border-neutral-300 dark:border-neutral-700 rounded-2xl">
+            <p class="text-sm text-neutral-500 font-mono">{{ t.skills.noResults }}</p>
+          </div>
+
+          <!-- Language Proficiency Banner -->
+          <div class="mt-8 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500 mb-1">
+                Communication & Documentation Proficiency
+              </h4>
+              <p class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                Fluent technical writing, code review communication, and cross-functional requirements gathering.
+              </p>
+            </div>
+            <div class="flex gap-4">
+              <div v-for="lang in data.languages" :key="lang.tag" class="flex items-center gap-2 p-2.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 font-mono text-xs">
+                <span class="w-6 h-6 rounded bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 font-bold flex items-center justify-center text-[10px]">{{ lang.tag }}</span>
+                <div>
+                  <div class="font-semibold text-neutral-900 dark:text-white">{{ lang.name[currentLang] }}</div>
+                  <div class="text-[10px] text-neutral-500">{{ lang.proficiency[currentLang] }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- EDUCATION & ACADEMIC HONORS -->
+      <section id="education" class="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          
+          <div class="max-w-2xl mb-12">
+            <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
+              05 // {{ t.education.title }}
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-white mb-3">
+              {{ t.education.title }}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              {{ t.education.subtitle }}
+            </p>
+          </div>
+
+          <div class="p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/60">
+            <div class="flex flex-wrap items-baseline justify-between gap-3 mb-6 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+              <div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-1">
+                  {{ data.education.institution }}
+                </h3>
+                <div class="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                  {{ data.education.degree[currentLang] }}
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+                  {{ data.education.period }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Metrics: GPA & Honors -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <div class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+                <div class="text-[11px] font-mono text-neutral-500 uppercase mb-1">{{ t.education.gpaLabel }}</div>
+                <div class="text-2xl font-mono font-bold text-neutral-900 dark:text-white">{{ data.education.gpa }}</div>
+              </div>
+              <div class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+                <div class="text-[11px] font-mono text-neutral-500 uppercase mb-1">{{ t.education.honorsLabel }}</div>
+                <div class="text-base font-semibold text-emerald-600 dark:text-emerald-400">{{ data.education.honors[currentLang] }}</div>
+              </div>
+            </div>
+
+            <!-- Coursework -->
+            <div>
+              <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500 mb-3">
+                {{ t.education.courseworkTitle }}
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                <span v-for="c in data.education.coursework[currentLang]" :key="c" class="px-2.5 py-1 rounded-lg bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-300">
+                  {{ c }}
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CONTACT & CONNECT SECTION -->
+      <section id="contact" class="py-16 sm:py-24 bg-neutral-50 dark:bg-neutral-900/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+          
+          <div class="max-w-2xl mb-12">
+            <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
+              06 // {{ t.contact.title }}
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-white mb-3">
+              {{ t.contact.title }}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              {{ t.contact.subtitle }}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Column: Direct Info & Quick Actions -->
+            <div class="lg:col-span-5 space-y-4">
+              <div class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+                <h3 class="text-sm font-mono font-bold uppercase tracking-wider text-neutral-500 mb-4">
+                  {{ t.contact.orDirect }}
+                </h3>
+
+                <!-- Email Card -->
+                <div class="p-3.5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 mb-3 flex items-center justify-between">
+                  <div class="overflow-hidden mr-2">
+                    <span class="text-[10px] font-mono uppercase text-neutral-400 block">Direct Email</span>
+                    <a :href="'mailto:' + data.profile.email" class="text-xs sm:text-sm font-mono font-medium text-blue-600 dark:text-blue-400 truncate block hover:underline">
+                      {{ data.profile.email }}
+                    </a>
+                  </div>
+                  <button @click="copyText(data.profile.email, 'Email')" class="p-2 rounded border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-xs text-neutral-700 dark:text-neutral-300 shrink-0" title="Copy Email">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  </button>
+                </div>
+
+                <!-- Phone / WhatsApp Card -->
+                <div class="p-3.5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 mb-3 flex items-center justify-between">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase text-neutral-400 block">Phone / WhatsApp</span>
+                    <a :href="'tel:' + data.profile.phone" class="text-xs sm:text-sm font-mono font-medium text-neutral-800 dark:text-neutral-200 block hover:underline">
+                      {{ data.profile.phone }}
+                    </a>
+                  </div>
+                  <button @click="copyText(data.profile.phone, 'Phone number')" class="p-2 rounded border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-xs text-neutral-700 dark:text-neutral-300 shrink-0" title="Copy Phone">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  </button>
+                </div>
+
+                <!-- Direct Links -->
+                <div class="grid grid-cols-2 gap-2 pt-2">
+                  <a :href="data.profile.socials.whatsapp" target="_blank" rel="noopener" class="py-2.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold text-center transition-colors">
+                    {{ t.contact.whatsappBtn }}
+                  </a>
+                  <a :href="'tel:' + data.profile.phone" class="py-2.5 px-3 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 text-xs font-semibold text-center transition-colors">
+                    {{ t.contact.phoneBtn }}
+                  </a>
+                </div>
+              </div>
+
+              <!-- Location Note -->
+              <div class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 font-mono text-xs text-neutral-500">
+                <span class="text-neutral-400 block mb-0.5">// BASE LOCATION</span>
+                <span class="text-neutral-800 dark:text-neutral-200 font-medium">{{ data.profile.location[currentLang] }}</span>
+              </div>
+            </div>
+
+            <!-- Right Column: Direct Message Composer -->
+            <div class="lg:col-span-7">
+              <form @submit.prevent="handleContactSubmit" class="p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 space-y-4">
+                
+                <div>
+                  <label class="block text-xs font-mono font-medium text-neutral-600 dark:text-neutral-400 mb-1.5">
+                    {{ t.contact.nameLabel }}
+                  </label>
+                  <input 
+                    type="text" 
+                    v-model="contactForm.name" 
+                    required 
+                    placeholder="e.g. John Doe / Company"
+                    class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-mono font-medium text-neutral-600 dark:text-neutral-400 mb-1.5">
+                      {{ t.contact.emailLabel }}
+                    </label>
+                    <input 
+                      type="email" 
+                      v-model="contactForm.email" 
+                      placeholder="e.g. john@example.com"
+                      class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-mono font-medium text-neutral-600 dark:text-neutral-400 mb-1.5">
+                      {{ t.contact.subjectLabel }}
+                    </label>
+                    <input 
+                      type="text" 
+                      v-model="contactForm.subject" 
+                      placeholder="e.g. Software Engineer Role Inquiry"
+                      class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono font-medium text-neutral-600 dark:text-neutral-400 mb-1.5">
+                    {{ t.contact.messageLabel }}
+                  </label>
+                  <textarea 
+                    v-model="contactForm.message" 
+                    rows="4" 
+                    required 
+                    placeholder="Type your message, opportunity details, or collaboration requirements..."
+                    class="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all"></textarea>
+                </div>
+
+                <button 
+                  type="submit" 
+                  class="w-full py-3 px-5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm transition-colors flex items-center justify-center gap-2">
+                  <span>{{ t.contact.sendBtn }}</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- CREDENTIAL DETAILS MODAL -->
+    <div v-if="selectedCert" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" @click.self="closeCertModal">
+      <div class="w-full max-w-lg p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl relative">
+        
+        <div class="flex items-start justify-between gap-4 mb-4">
+          <div>
+            <span class="inline-block px-2 py-0.5 rounded font-mono text-[10px] uppercase font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 mb-1">
+              {{ t.modal.certDetails }}
+            </span>
+            <h3 class="text-lg font-bold text-neutral-900 dark:text-white">
+              {{ selectedCert.title[currentLang] }}
+            </h3>
+          </div>
+          <button @click="closeCertModal" class="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 text-lg">✕</button>
+        </div>
+
+        <div class="space-y-4 my-4 text-xs sm:text-sm">
+          <div class="p-3 rounded-lg bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 font-mono text-xs">
+            <div class="text-neutral-400 uppercase text-[10px] mb-0.5">Issuing Authority</div>
+            <div class="font-semibold text-neutral-800 dark:text-neutral-200">{{ selectedCert.issuer }}</div>
+            <div class="text-neutral-500 mt-1">Validity / Status: {{ selectedCert.period }} ({{ selectedCert.regNo }})</div>
+          </div>
+
+          <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+            {{ selectedCert.description[currentLang] }}
+          </p>
+
+          <div v-if="selectedCert.topics">
+            <div class="font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-2">
+              {{ t.modal.competencyAreas }}
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span v-for="top in selectedCert.topics" :key="top" class="px-2.5 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs">
+                ✓ {{ top }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex justify-end">
+          <button @click="closeCertModal" class="py-2 px-4 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold">
+            {{ t.modal.close }}
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-10 transition-colors">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500 font-mono">
+        <div>
+          <span>© 2026 Faiz Nur Fakhri, S.Kom. {{ t.footer.rights }}</span>
+          <span class="block text-[11px] text-neutral-400 mt-0.5">{{ t.footer.builtWith }}</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <a :href="data.profile.cvFiles.en" download class="hover:text-blue-600 dark:hover:text-blue-400">CV (EN)</a>
+          <a :href="data.profile.cvFiles.id" download class="hover:text-blue-600 dark:hover:text-blue-400">CV (ID)</a>
+          <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400">{{ t.footer.backToTop }} ↑</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Local Vue 3 and Fallback Loader -->
+  <script src="vendor/vue.global.prod.js"></script>
+  <script>
+    if (!window.Vue) {
+      document.write('<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"><\/script>');
+    }
+  </script>
+
+  <!-- Application Entry Point -->
+  <script type="module">
+    import { initPortfolio } from './js/app.js';
+    if (window.Vue) {
+      initPortfolio(window.Vue);
+    } else {
+      window.addEventListener('load', () => {
+        if (window.Vue) initPortfolio(window.Vue);
+      });
+    }
+  </script>
+
+</body>
+</html>
