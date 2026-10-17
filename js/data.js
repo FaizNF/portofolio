@@ -24,10 +24,12 @@ export const portfolioData = {
     },
     cvFiles: {
       en: "Faiz_Nur_Fakhri_CV.pdf",
-      id: "CV_Faiz_Nur_Fakhri_ID.pdf"
+      id: "CV_Faiz_Nur_Fakhri_ID.pdf",
+      githubEn: "https://github.com/FaizNF/portofolio/blob/main/Faiz_Nur_Fakhri_CV.pdf",
+      githubId: "https://github.com/FaizNF/portofolio/blob/main/CV_Faiz_Nur_Fakhri_ID.pdf"
     },
     socials: {
-      github: "https://github.com",
+      github: "https://github.com/FaizNF/portofolio",
       email: "mailto:Faiz.swh@gmail.com",
       whatsapp: "https://wa.me/6281318464206"
     },
