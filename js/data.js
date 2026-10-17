@@ -88,6 +88,10 @@ export const portfolioData = {
       id: "rekayasa-inventory",
       featured: true,
       category: "Full-Stack Web Engineering",
+      badge: {
+        en: "Kemnaker Certified (\"Sangat Baik\")",
+        id: "Sertifikasi Kemnaker (\"Sangat Baik\")"
+      },
       title: {
         en: "Enterprise Inventory & Distribution Management System",
         id: "Sistem Manajemen Inventaris & Distribusi Skala Enterprise"
@@ -127,9 +131,206 @@ export const portfolioData = {
       }
     },
     {
+      id: "sentrapixel",
+      featured: true,
+      category: "Production Web Platform & E-Commerce",
+      liveUrl: "https://sentrapixel.com",
+      badge: {
+        en: "Live Production Platform",
+        id: "Platform Produksi Aktif"
+      },
+      title: {
+        en: "SentraPixel: Digital Agency & E-Commerce Web Engineering Platform",
+        id: "SentraPixel: Platform Rekayasa Web Digital Agency & E-Commerce"
+      },
+      organization: "SentraPixel (sentrapixel.com)",
+      period: "2024 – Present",
+      tagline: {
+        en: "High-performance agency platform with client progress tracker and payment gateway integration",
+        id: "Platform agensi web performa tinggi dengan pelacak progres klien dan gateway pembayaran"
+      },
+      description: {
+        en: "Architected and deployed a commercial web engineering platform for SentraPixel digital agency. Features automated client onboarding, real-time project milestone tracking via JSON data stores, responsive Tailwind UI, and payment checkout integration with Mayar and Midtrans.",
+        id: "Merancang dan merilis platform web komersial untuk agensi digital SentraPixel. Dilengkapi onboarding klien otomatis, pelacakan progres proyek real-time via data store JSON, antarmuka Tailwind responsif, serta integrasi checkout pembayaran Mayar dan Midtrans."
+      },
+      impactPoints: {
+        en: [
+          "Engineered client portal with dynamic real-time progress tracker, invoice generation, and milestone delivery monitoring.",
+          "Integrated Indonesian payment gateways (Mayar and Midtrans) supporting QRIS, Virtual Accounts, and e-wallets.",
+          "Optimized asset delivery and core web vitals achieving < 1.2s First Contentful Paint and 98+ mobile Lighthouse scores.",
+          "Built responsive, accessible UI modules with semantic HTML5, modern CSS/Tailwind, and vanilla JavaScript."
+        ],
+        id: [
+          "Mengembangkan portal klien dengan pelacak progres real-time, penerbitan invoice otomatis, dan pemantauan milestone.",
+          "Mengintegrasikan payment gateway Indonesia (Mayar dan Midtrans) untuk QRIS, Virtual Account, dan dompet digital.",
+          "Mengoptimasi pengiriman aset dan web vitals sehingga meraih First Contentful Paint < 1,2 detik dan skor Lighthouse 98+.",
+          "Membangun antarmuka responsif dan aksesibel menggunakan HTML5 semantik, Tailwind CSS, dan vanilla JavaScript."
+        ]
+      },
+      technologies: ["PHP", "JavaScript (ES6+)", "Tailwind CSS", "Mayar / Midtrans API", "JSON Data Store", "Responsive Web Design"]
+    },
+    {
+      id: "gamutdesk",
+      featured: true,
+      category: "Web Application & Color Science",
+      liveUrl: "https://gamutdesk.com",
+      badge: {
+        en: "Live Web Utility (57/57 Vitest Tests)",
+        id: "Utilitas Web Aktif (57/57 Tes Vitest)"
+      },
+      title: {
+        en: "GamutDesk: Display Gamut, Color Space & Accessibility Engine",
+        id: "GamutDesk: Engine Gamut Layar, Ruang Warna & Aksesibilitas"
+      },
+      organization: "GamutDesk (gamutdesk.com)",
+      period: "2025 – Present",
+      tagline: {
+        en: "Client-side display color gamut testing, OKLCH converter, and APCA contrast calculator",
+        id: "Pengujian gamut warna layar sisi klien, konverter OKLCH, dan kalkulator kontras APCA"
+      },
+      description: {
+        en: "Engineered an in-browser color space and display profiling utility built with Next.js App Router and TypeScript. Runs 100% client-side with zero tracking, computing sRGB, Display P3, and Rec. 2020 gamut coverage, color difference formulas (ΔE*00, ΔE_ITP), and APCA accessibility compliance.",
+        id: "Membangun utilitas profiling gamut layar dan ruang warna berbasis peramban menggunakan Next.js App Router dan TypeScript. Bekerja 100% di sisi klien tanpa pelacakan data, menghitung cakupan sRGB, Display P3, Rec. 2020, formula delta warna (ΔE*00, ΔE_ITP), dan kepatuhan kontras APCA."
+      },
+      impactPoints: {
+        en: [
+          "Engineered multi-space color conversion algorithms for sRGB, Display P3, Rec. 2020, CIE Lab, and OKLCH in pure TypeScript.",
+          "Implemented APCA (Accessible Perceptual Contrast Algorithm) scoring alongside legacy WCAG 2.1 ratio checks.",
+          "Authored comprehensive unit test suite with 57/57 passing Vitest assertions ensuring mathematical accuracy.",
+          "Offloaded intensive delta-E calculations to Web Workers to maintain 60 FPS UI responsiveness during real-time color sweeps."
+        ],
+        id: [
+          "Mengembangkan algoritma konversi multi-ruang warna untuk sRGB, Display P3, Rec. 2020, CIE Lab, dan OKLCH murni TypeScript.",
+          "Mengimplementasikan kalkulasi kontras APCA (Accessible Perceptual Contrast Algorithm) dan verifikasi rasio WCAG 2.1.",
+          "Menyusun rangkaian unit test komprehensif dengan 57/57 tes Vitest lulus untuk menjamin akurasi matematis.",
+          "Mengalihkan komputasi berat delta-E ke Web Workers guna menjaga responsivitas UI tetap stabil pada 60 FPS."
+        ]
+      },
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Web Workers", "Vitest", "Color Science (OKLCH / APCA)"]
+    },
+    {
+      id: "weeklytimecardcalc",
+      featured: true,
+      category: "Financial SaaS & Web Utility",
+      liveUrl: "https://weeklytimecardcalc.com",
+      badge: {
+        en: "Live SaaS (FLSA § 778 Compliant)",
+        id: "SaaS Aktif (Kepatuhan FLSA § 778)"
+      },
+      title: {
+        en: "Weekly Time Card Calculator: FLSA Overtime & Payroll SaaS",
+        id: "Kalkulator Kartu Jam Kerja Mingguan: SaaS Payroll & Lembur FLSA"
+      },
+      organization: "WeeklyTimeCardCalc (weeklytimecardcalc.com)",
+      period: "2024 – Present",
+      tagline: {
+        en: "Zero-latency payroll calculation engine with military time support, breaks deduction, and instant PDF export",
+        id: "Engine kalkulasi payroll tanpa latensi dengan dukungan format waktu militer, potongan istirahat, dan ekspor PDF"
+      },
+      description: {
+        en: "Engineered a production payroll utility serving international hourly employees and HR administrators. Implements United States FLSA § 778 overtime regulations (1.5x daily >8h and weekly >40h thresholds), configurable lunch break deductions, local storage persistence, and print/PDF timesheet generation.",
+        id: "Membangun utilitas payroll berbasis web untuk pekerja per jam dan staf administrasi HR. Mengimplementasikan regulasi lembur FLSA AS § 778 (tarif 1,5x harian >8 jam dan mingguan >40 jam), potongan jam istirahat fleksibel, penyimpanan lokal peramban, dan cetak PDF rekap lembar jam kerja."
+      },
+      impactPoints: {
+        en: [
+          "Programmed exact overtime logic compliant with standard and California double-time wage regulations.",
+          "Implemented local client-side state caching allowing users to resume timesheet entries without data loss.",
+          "Built responsive table interface with keyboard-accessible navigation and one-click printable reports.",
+          "Optimized SEO metadata, schema.org structured markup, and robots/sitemap indexing across Google and Bing."
+        ],
+        id: [
+          "Memprogram logika lembur akurat sesuai regulasi upah standar maupun ketentuan double-time California.",
+          "Menerapkan penyimpanan status lokal peramban (client-side caching) agar pengisian data tidak hilang saat ditutup.",
+          "Merancang antarmuka tabel responsif dengan navigasi ramah keyboard dan ekspor laporan cetak sekali klik.",
+          "Mengoptimasi metadata SEO, skema terstruktur schema.org, serta pengindeksan Google dan Bing."
+        ]
+      },
+      technologies: ["JavaScript (Vanilla ES6+)", "HTML5", "CSS3 / Custom Utility", "Local Storage API", "Print CSS", "Technical SEO"]
+    },
+    {
+      id: "mutiara-kursus",
+      featured: true,
+      category: "EdTech & Full-Stack Web Platform",
+      badge: {
+        en: "Academic Platform (16 Sessions + Locked Exam)",
+        id: "Platform Akademik (16 Pertemuan + Ujian Terkunci)"
+      },
+      title: {
+        en: "Academic Course Management & Online Examination System",
+        id: "Sistem Manajemen Kursus Akademik & Ujian Online Terkunci"
+      },
+      organization: "LKP Mutiara Komputer",
+      period: "2024",
+      tagline: {
+        en: "Comprehensive academic training system with photo-verified attendance tracking and anti-cheat exam engine",
+        id: "Sistem pelatihan akademik terpadu dengan absensi verifikasi foto dan engine ujian anti-curang"
+      },
+      description: {
+        en: "Engineered an integrated course administration and online exam system for LKP Mutiara Komputer. Features a strict 16-session curriculum attendance workflow with webcam photo capture, computerized test engine with window-blur detection and countdown lock, automated grading, and official PDF certificate and revenue report generation via FPDF.",
+        id: "Mengembangkan sistem administrasi kursus dan ujian online terpadu untuk LKP Mutiara Komputer. Dilengkapi alur absensi 16 sesi dengan tangkapan foto webcam, engine ujian komputer dengan deteksi blur jendela dan penguncian waktu, penilaian otomatis, serta pencetakan sertifikat dan laporan keuangan PDF via FPDF."
+      },
+      impactPoints: {
+        en: [
+          "Engineered attendance tracking system enforcing 16 sequential syllabus sessions with student webcam photo verification.",
+          "Built secure 90-minute online exam engine featuring auto-submission upon timeout and browser window-blur anti-cheat logging.",
+          "Automated grading calculations across multiple question categories, eliminating manual exam correction overhead.",
+          "Implemented FPDF document generators producing formal completion certificates and institutional revenue ledgers."
+        ],
+        id: [
+          "Mengembangkan modul absensi terstruktur untuk 16 pertemuan silabus disertai verifikasi foto webcam peserta didik.",
+          "Membangun sistem ujian online 90 menit dengan pengumpulan otomatis saat waktu habis dan pencatat pelanggaran anti-curang.",
+          "Mengotomatisasi kalkulasi penilaian di berbagai kategori soal sehingga menghapus beban koreksi manual instruktur.",
+          "Mengimplementasikan generator PDF berbasis FPDF untuk penerbitan sertifikat kelulusan resmi dan laporan rekap pendapatan."
+        ]
+      },
+      technologies: ["PHP", "MySQL", "JavaScript", "FPDF", "Webcam API", "CSS3 / Bootstrap", "Role-Based Access Control"]
+    },
+    {
+      id: "mutiara-koperasi",
+      featured: true,
+      category: "Financial Management & Enterprise Web Application",
+      badge: {
+        en: "Financial Ledger & Loan System",
+        id: "Sistem Pembukuan & Pinjaman Keuangan"
+      },
+      title: {
+        en: "KoperasiHub: Financial Savings & Loan Management System",
+        id: "KoperasiHub: Sistem Manajemen Keuangan Simpan Pinjam Koperasi"
+      },
+      organization: "Koperasi Mutiara Komputer",
+      period: "2024",
+      tagline: {
+        en: "Multi-tier cooperative accounting application managing member deposits, loan disbursements, and interest ledgers",
+        id: "Aplikasi akuntansi koperasi multi-level untuk simpanan anggota, pencairan pinjaman, dan buku besar bunga"
+      },
+      description: {
+        en: "Architected a full-stack cooperative financial management system using Laravel and MySQL. Digitized cooperative operations by tracking principal, mandatory, and voluntary member savings, loan amortization schedules with automated penalty calculations, dividend distribution (SHU), and printable accounting journals.",
+        id: "Merancang sistem manajemen keuangan koperasi full-stack menggunakan Laravel dan MySQL. Mendigitalkan operasional koperasi dengan mencatat simpanan pokok, wajib, dan sukarela, jadwal angsuran pinjaman dengan kalkulasi denda otomatis, pembagian SHU, dan jurnal akuntansi siap cetak."
+      },
+      impactPoints: {
+        en: [
+          "Architected relational schema in MySQL for member savings portfolios, active credit balances, and transaction logs.",
+          "Programmed financial calculation algorithms for declining/flat interest amortization, late penalty accruals, and SHU dividend splits.",
+          "Engineered role-based access control protecting cashier transactions, manager approvals, and audit log reviews.",
+          "Produced comprehensive operational manual and automated financial reports ready for cooperative annual meetings (RAT)."
+        ],
+        id: [
+          "Merancang skema relasional MySQL untuk portofolio simpanan anggota, saldo kredit aktif, dan log transaksi finansial.",
+          "Memprogram algoritma kalkulasi keuangan untuk amortisasi bunga flat/menurun, denda keterlambatan, dan pembagian dividen SHU.",
+          "Menerapkan hak akses berbasis peran (RBAC) yang memisahkan transaksi kasir, persetujuan manajer, dan tinjauan log audit.",
+          "Menyusun buku panduan operasional lengkap serta laporan keuangan otomatis untuk kebutuhan Rapat Anggota Tahunan (RAT)."
+        ]
+      },
+      technologies: ["PHP", "Laravel", "MySQL", "Tailwind CSS / Blade", "Financial Amortization Engines", "PDF Reporting", "RBAC"]
+    },
+    {
       id: "atlas-iot",
       featured: true,
       category: "IoT & Embedded Systems",
+      badge: {
+        en: "Top 8 Favourite Winner (IPK 3.96)",
+        id: "Pemenang Favorit Top 8 (IPK 3,96)"
+      },
       title: {
         en: "ATLAS: Smart Autonomous Transplanter for Sustainable Agriculture",
         id: "ATLAS: Automatisasi Transplanter Cerdas Untuk Pertanian Keberlanjutan"
@@ -170,6 +371,10 @@ export const portfolioData = {
       id: "elkom-curriculum",
       featured: true,
       category: "Embedded Systems & Academic Engineering",
+      badge: {
+        en: "3+ Consecutive Years Leadership",
+        id: "Kepemimpinan 3+ Tahun Berturut-turut"
+      },
       title: {
         en: "Academic Lab Curriculum & Embedded Systems Architecture",
         id: "Kurikulum Praktikum Laboratorium & Sistem Tertanam"
