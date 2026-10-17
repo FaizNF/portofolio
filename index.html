@@ -256,145 +256,101 @@
             </p>
           </div>
 
-          <!-- Featured Project 1: PT Rekayasa Engineering Inventory System -->
-          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 p-6 sm:p-8 mb-8">
-            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-neutral-800">
-              <div>
-                <span class="inline-block px-2.5 py-1 rounded bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-mono text-xs font-semibold mb-2">
-                  PT Rekayasa Engineering
-                </span>
-                <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white">
-                  {{ data.projects[0].title[currentLang] }}
-                </h3>
-              </div>
-              <div class="text-right">
-                <span class="font-mono text-xs font-medium text-neutral-500 block">
-                  {{ data.projects[0].period }}
-                </span>
-                <span class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                  Kemnaker Certified ("Sangat Baik")
-                </span>
-              </div>
-            </div>
-
-            <!-- Description -->
-            <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 my-6 leading-relaxed">
-              {{ data.projects[0].description[currentLang] }}
-            </p>
-
-            <!-- ARCHITECTURAL SCHEMATIC BREAKDOWN (No AI Slop, pure structural clarity) -->
-            <div class="mb-8 p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
-              <div class="flex items-center justify-between mb-4">
-                <span class="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500">
-                  {{ t.projects.architectureTitle }}
-                </span>
-                <span class="text-[11px] font-mono text-neutral-400">MVC + Relational Transactions</span>
-              </div>
-              
-              <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-                <!-- Tier 1: Client UI -->
-                <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
-                  <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">1. Frontend Layer</div>
-                  <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Vue.js SPA Modules</div>
-                  <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
-                    Dynamic borrowing forms, responsive inventory tables, and instant approval action toggles.
-                  </p>
+          <!-- Dynamic Projects List -->
+          <div class="space-y-8">
+            <div v-for="(proj, pIdx) in data.projects" :key="proj.id" class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 p-6 sm:p-8">
+              <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+                <div>
+                  <span class="inline-block px-2.5 py-1 rounded bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-mono text-xs font-semibold mb-2">
+                    {{ proj.organization }}
+                  </span>
+                  <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white">
+                    {{ proj.title[currentLang] }}
+                  </h3>
                 </div>
-
-                <!-- Tier 2: Controller & Guard -->
-                <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
-                  <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">2. Gateway & Auth</div>
-                  <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Laravel Middleware</div>
-                  <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
-                    Strict RBAC checking, form request sanitation, and RESTful route orchestration.
-                  </p>
-                </div>
-
-                <!-- Tier 3: Transaction Engine -->
-                <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
-                  <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">3. Domain Logic</div>
-                  <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Approval Engine</div>
-                  <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
-                    Real-time stock audit trails, transactional borrowing logs, multi-tier approvals.
-                  </p>
-                </div>
-
-                <!-- Tier 4: Storage -->
-                <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
-                  <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">4. Persistence</div>
-                  <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">MySQL Database</div>
-                  <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
-                    Normalized 3NF relational schemas, indexed foreign keys, and ACID consistency.
-                  </p>
+                <div class="text-right">
+                  <span class="font-mono text-xs font-medium text-neutral-500 block">
+                    {{ proj.period }}
+                  </span>
+                  <span v-if="proj.id === 'rekayasa-inventory'" class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Kemnaker Certified ("Sangat Baik")
+                  </span>
+                  <span v-else-if="proj.id === 'atlas-iot'" class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                    Top 8 Favourite Winner (IPK 3.96)
+                  </span>
+                  <span v-else class="text-xs font-semibold text-neutral-600 dark:text-neutral-400 mt-1 block">
+                    3+ Consecutive Years Leadership
+                  </span>
                 </div>
               </div>
-            </div>
 
-            <!-- Impact Points -->
-            <div class="mb-6">
-              <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500 mb-3">
-                {{ t.projects.impactTitle }}
-              </h4>
-              <ul class="space-y-2.5">
-                <li v-for="(pt, pIdx) in data.projects[0].impactPoints[currentLang]" :key="pIdx" class="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
-                  <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>{{ pt }}</span>
-                </li>
-              </ul>
-            </div>
+              <!-- Description -->
+              <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 my-6 leading-relaxed">
+                {{ proj.description[currentLang] }}
+              </p>
 
-            <!-- Tech Tags -->
-            <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-2">
-              <span v-for="t in data.projects[0].technologies" :key="t" class="px-2.5 py-1 rounded bg-neutral-200/80 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs font-medium">
-                {{ t }}
-              </span>
-            </div>
-          </div>
-
-          <!-- Featured Project 2: ELKOM Laboratory Curriculum & Systems -->
-          <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 p-6 sm:p-8">
-            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-neutral-800">
-              <div>
-                <span class="inline-block px-2.5 py-1 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-mono text-xs font-semibold mb-2">
-                  ELKOM Laboratory, Universitas Gunadarma
-                </span>
-                <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white">
-                  {{ data.projects[1].title[currentLang] }}
-                </h3>
+              <!-- ARCHITECTURAL SCHEMATIC BREAKDOWN (If present) -->
+              <div v-if="proj.id === 'rekayasa-inventory'" class="mb-8 p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500">
+                    {{ t.projects.architectureTitle }}
+                  </span>
+                  <span class="text-[11px] font-mono text-neutral-400">MVC + Relational Transactions</span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                    <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">1. Frontend Layer</div>
+                    <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Vue.js SPA Modules</div>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
+                      Dynamic borrowing forms, responsive inventory tables, and instant approval action toggles.
+                    </p>
+                  </div>
+                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                    <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">2. Gateway & Auth</div>
+                    <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Laravel Middleware</div>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
+                      Strict RBAC checking, form request sanitation, and RESTful route orchestration.
+                    </p>
+                  </div>
+                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                    <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">3. Domain Logic</div>
+                    <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Approval Engine</div>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
+                      Real-time stock audit trails, transactional borrowing logs, multi-tier approvals.
+                    </p>
+                  </div>
+                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                    <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">4. Persistence</div>
+                    <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">MySQL Database</div>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
+                      Normalized 3NF relational schemas, indexed foreign keys, and ACID consistency.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="text-right">
-                <span class="font-mono text-xs font-medium text-neutral-500 block">
-                  {{ data.projects[1].period }}
-                </span>
-                <span class="text-xs font-semibold text-neutral-600 dark:text-neutral-400 mt-1 block">
-                  3+ Consecutive Years Leadership
+
+              <!-- Impact Points -->
+              <div class="mb-6">
+                <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500 mb-3">
+                  {{ t.projects.impactTitle }}
+                </h4>
+                <ul class="space-y-2.5">
+                  <li v-for="(pt, pIdx) in proj.impactPoints[currentLang]" :key="pIdx" class="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
+                    <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span>{{ pt }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Tech Tags -->
+              <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-2">
+                <span v-for="t in proj.technologies" :key="t" class="px-2.5 py-1 rounded bg-neutral-200/80 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs font-medium">
+                  {{ t }}
                 </span>
               </div>
-            </div>
-
-            <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 my-6 leading-relaxed">
-              {{ data.projects[1].description[currentLang] }}
-            </p>
-
-            <!-- Impact Points -->
-            <div class="mb-6">
-              <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500 mb-3">
-                {{ t.projects.impactTitle }}
-              </h4>
-              <ul class="space-y-2.5">
-                <li v-for="(pt, pIdx) in data.projects[1].impactPoints[currentLang]" :key="pIdx" class="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
-                  <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                  <span>{{ pt }}</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Tech Tags -->
-            <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-2">
-              <span v-for="t in data.projects[1].technologies" :key="t" class="px-2.5 py-1 rounded bg-neutral-200/80 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs font-medium">
-                {{ t }}
-              </span>
             </div>
           </div>
 
@@ -507,18 +463,24 @@
                 </p>
 
                 <!-- Sub-items if any -->
-                <div v-if="cert.items" class="space-y-1.5 mb-4">
-                  <div v-for="it in cert.items" :key="it.name" class="flex items-center justify-between text-xs font-mono py-1 px-2 rounded bg-white dark:bg-neutral-950 border border-neutral-200/60 dark:border-neutral-800/60">
+                <div v-if="cert.items" class="space-y-1.5 mb-4 max-h-52 overflow-y-auto pr-1">
+                  <div v-for="it in cert.items" :key="it.name" class="flex items-center justify-between text-xs font-mono py-1.5 px-2 rounded bg-white dark:bg-neutral-950 border border-neutral-200/60 dark:border-neutral-800/60">
                     <span class="text-neutral-700 dark:text-neutral-300">{{ it.name }}</span>
-                    <span class="text-neutral-400 font-medium">{{ it.year }}</span>
+                    <span class="text-neutral-400 font-medium shrink-0 ml-2 text-[11px]">{{ it.year }}</span>
                   </div>
                 </div>
               </div>
 
-              <!-- Action to open details modal -->
-              <button @click="openCertModal(cert)" class="mt-4 w-full py-2 px-3 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:border-blue-600 dark:hover:border-blue-400 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-medium transition-colors">
-                {{ t.certifications.viewDetails }}
-              </button>
+              <!-- Action buttons -->
+              <div class="mt-4 pt-3 border-t border-neutral-200/60 dark:border-neutral-800/60 flex items-center gap-2">
+                <button @click="openCertModal(cert)" class="flex-1 py-2 px-3 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:border-blue-600 dark:hover:border-blue-400 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-medium transition-colors text-center">
+                  {{ t.certifications.viewDetails }}
+                </button>
+                <a v-if="cert.pdfFile" :href="cert.pdfFile" target="_blank" download class="py-2 px-3 rounded-lg bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-blue-600 dark:text-blue-400 text-xs font-semibold flex items-center gap-1 transition-colors" title="Download Document">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  <span>PDF</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -842,7 +804,12 @@
           </div>
         </div>
 
-        <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex justify-end">
+        <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between gap-3">
+          <a v-if="selectedCert.pdfFile" :href="selectedCert.pdfFile" target="_blank" download class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>{{ currentLang === 'en' ? 'Download Official Certificate PDF' : 'Unduh Dokumen PDF Resmi' }}</span>
+          </a>
+          <div v-else></div>
           <button @click="closeCertModal" class="py-2 px-4 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold">
             {{ t.modal.close }}
           </button>

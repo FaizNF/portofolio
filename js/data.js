@@ -127,6 +127,46 @@ export const portfolioData = {
       }
     },
     {
+      id: "atlas-iot",
+      featured: true,
+      category: "IoT & Embedded Systems",
+      title: {
+        en: "ATLAS: Smart Autonomous Transplanter for Sustainable Agriculture",
+        id: "ATLAS: Automatisasi Transplanter Cerdas Untuk Pertanian Keberlanjutan"
+      },
+      organization: "MSIB Kampus Merdeka Cycle 7 (PT Ozami Inti Sinergi / Indobot Academy)",
+      period: "Aug 2024 – Dec 2024",
+      tagline: {
+        en: "Top 8 Demo Day Favourite Winner — IoT agricultural automation platform",
+        id: "Favourite Winner Top 8 Demo Day — Sistem otomasi pertanian berbasis IoT"
+      },
+      description: {
+        en: "Architected and engineered an autonomous smart transplanter system to automate agricultural planting routines. Integrated WiFi microcontrollers, obstacle detection telemetry, and real-time cloud data pipelines. Awarded Favourite Winner in Demo Day Top 8 across nationwide university participants.",
+        id: "Merancang dan membangun sistem transplanter mandiri cerdas untuk mengotomatisasi penanaman bibit pertanian. Mengintegrasikan mikrokontroler WiFi, telemetri deteksi halangan, dan antarmuka cloud real-time. Meraih penghargaan Favourite Winner pada Demo Day Top 8 nasional."
+      },
+      impactPoints: {
+        en: [
+          "Awarded Favourite Winner in Demo Day Top 8 across nationwide university engineering cohorts in the MSIB Kampus Merdeka IoT Engineer Camp (After Class Summit 2024).",
+          "Engineered firmware logic in C++/Arduino for WiFi microcontrollers, actuator motor drivers, and sensor array data logging.",
+          "Implemented web and cloud telemetry dashboard for real-time device health, soil parameters, and operational waypoint tracking.",
+          "Achieved a 3.96 / 4.00 Grade Point Average across 20 SKS of intensive IoT engineering and smart device curriculum."
+        ],
+        id: [
+          "Meraih predikat Favourite Winner dalam Demo Day Top 8 nasional pada program MSIB Kampus Merdeka IoT Engineer Camp (After Class Summit 2024).",
+          "Mengembangkan logika firmware C++/Arduino untuk mikrokontroler WiFi, pengendali aktuator motor, dan pencatatan sensor terpadu.",
+          "Mengimplementasikan dasbor telemetri cloud dan web untuk pemantauan kesehatan perangkat, parameter lahan, dan pelacakan koordinat.",
+          "Meraih IP 3,96 / 4,00 pada 20 SKS kurikulum intensif rekayasa IoT dan perancangan perangkat cerdas."
+        ]
+      },
+      technologies: ["C++", "Arduino", "ESP32", "IoT Cloud Platforms", "Sensors Telemetry", "Motor Drivers", "RESTful Web APIs"],
+      architectureDetails: {
+        pattern: "Distributed IoT Edge & Cloud Architecture",
+        database: "Time-series sensor telemetry and cloud state storage",
+        frontend: "Web & mobile interface for remote command dispatch and live monitoring",
+        backend: "WiFi microcontroller firmware with event-driven state machine"
+      }
+    },
+    {
       id: "elkom-curriculum",
       featured: true,
       category: "Embedded Systems & Academic Engineering",
@@ -241,36 +281,81 @@ export const portfolioData = {
         id: "Program Magang Programmer Bersertifikat"
       },
       issuer: "PT Rekayasa Engineering & Kementerian Ketenagakerjaan RI (Kemnaker)",
-      period: "2026",
-      regNo: "Grade: Sangat Baik (Excellent)",
+      period: "2025 – 2026",
+      regNo: "No: MN.031.012469.03.2025 (Grade: Sangat Baik)",
       verified: true,
+      pdfFile: "assets/certs/rekayasa-magang-programmer.pdf",
       description: {
-        en: "Nationally recognized industrial internship certification awarded for engineering independence, full-stack software delivery, and exceptional problem-solving in production enterprise systems.",
+        en: "Nationally recognized industrial internship certification awarded for engineering independence, full-stack software delivery, and top performance rating 'Sangat Baik' (Excellent) in production enterprise systems.",
         id: "Sertifikasi magang industri nasional atas kemandirian rekayasa perangkat lunak, implementasi sistem full-stack produksi, dan predikat penilaian kinerja tertinggi 'Sangat Baik'."
       },
       topics: ["Production Web Engineering", "Enterprise MVC Architecture", "Database Normalization", "Stakeholder Collaboration"]
     },
     {
+      id: "msib-iot-winner",
+      title: {
+        en: "Certified IoT Engineer & Top 8 Demo Day Favourite Winner",
+        id: "Sertifikasi Kompetensi IoT Engineer & Favourite Winner Top 8"
+      },
+      issuer: "MSIB Kampus Merdeka & PT Ozami Inti Sinergi (Indobot Academy)",
+      period: "2024",
+      regNo: "No: 063-13/SRTF/PTOZAMI/XII/2024 & 128-066/SRTF/PTOZAMI/XII/2024",
+      verified: true,
+      pdfFile: "assets/certs/msib-favourite-winner.pdf",
+      description: {
+        en: "Awarded Favourite Winner in Demo Day Top 8 national competition for the 'ATLAS' autonomous agricultural transplanter project. Certified IoT Engineer with a 3.96/4.00 GPA across 20 SKS of embedded hardware, microcontrollers, and cloud telemetry.",
+        id: "Meraih penghargaan Favourite Winner pada Demo Day Top 8 nasional melalui proyek transplanter otomasi pertanian 'ATLAS'. Bersertifikat Kompetensi IoT Engineer dengan IPK 3,96/4,00 pada 20 SKS kurikulum perangkat cerdas dan telemetri cloud."
+      },
+      topics: ["IoT Concept Architecture", "WiFi Microcontrollers", "IoT Cloud Platforms", "Web & Android Interface", "Smart Device Prototyping"]
+    },
+    {
       id: "gunadarma-certs",
       title: {
-        en: "Gunadarma University Technical Certifications",
-        id: "Sertifikasi Teknis Universitas Gunadarma"
+        en: "Gunadarma University Technical Certifications (10 Specializations)",
+        id: "Sertifikasi Teknis Universitas Gunadarma (10 Bidang Spesialisasi)"
       },
       issuer: "Universitas Gunadarma",
-      period: "2023 – 2025",
-      regNo: "Series: 2023–2025",
+      period: "2022 – 2025",
+      regNo: "Series: 2022–2025 (10 Official Certificates)",
       verified: true,
       items: [
-        { name: "Wireless LAN", year: "2025" },
-        { name: "Microcontroller Programming", year: "2024" },
-        { name: "Network Fault Detection & Recovery", year: "2024" },
-        { name: "Routing Protocols", year: "2023" }
+        { name: "Instalasi LAN Nirkabel (Wireless LAN)", year: "2025 (No. 814845)" },
+        { name: "Optimalisasi Kinerja Jaringan Komputer (Uji Kompetensi)", year: "2024 (No. 966464)" },
+        { name: "Optimalisasi Kinerja Jaringan Komputer", year: "2024 (No. 001360)" },
+        { name: "Pelacakan & Pemulihan Kerusakan Jaringan", year: "2024 (No. 010045)" },
+        { name: "Pemrograman Mikrokontroler (Microcontroller)", year: "2024 (No. 721177)" },
+        { name: "Tata Kelola Keamanan Jaringan Komputer", year: "2023 (No. 040341)" },
+        { name: "Tata Kelola Pengalamatan dan Routing", year: "2023 (No. 890284)" },
+        { name: "Teknologi & Aplikasi Drone", year: "2023 (No. 594177)" },
+        { name: "Implementasi Koneksi Jaringan Komputer", year: "2022 (No. 936589)" },
+        { name: "Identifikasi Kebutuhan Jaringan Komputer", year: "2022 (No. 521824)" }
       ],
       description: {
-        en: "Comprehensive technical proficiency certifications covering RF / WLAN deployment, embedded microcontroller architectures, enterprise routing protocol configuration, and systematic network recovery.",
-        id: "Sertifikasi kemahiran teknis menyeluruh mencakup implementasi WLAN, arsitektur mikrokontroler tertanam, konfigurasi protokol routing enterprise, dan pemulihan jaringan sistematis."
+        en: "Comprehensive technical proficiency certifications covering WLAN deployment, embedded microcontroller architectures, enterprise routing protocol configuration, drone applications, network security, and fault recovery.",
+        id: "Sertifikasi kemahiran teknis menyeluruh mencakup implementasi WLAN, arsitektur mikrokontroler, protokol routing, teknologi drone, keamanan jaringan, dan pemulihan gangguan."
       },
-      topics: ["WLAN 802.11", "Microcontrollers", "Routing Protocols", "Packet Analysis"]
+      topics: ["WLAN 802.11", "Microcontrollers", "Routing Protocols", "Network Security", "Drone Tech", "Fault Diagnostics"]
+    },
+    {
+      id: "industry-talkshows",
+      title: {
+        en: "Industrial Seminars & Technology Talks",
+        id: "Seminar Industri & Diskusi Teknologi"
+      },
+      issuer: "PT Ozami Inti Sinergi & Indobot Academy",
+      period: "2024",
+      regNo: "Series: 2024 (Verified Attendance)",
+      verified: true,
+      items: [
+        { name: "Transforming Industries with Emerging Technologies", year: "2024 (No. 64-059/2024)" },
+        { name: "Tren Industri dan Kebutuhan Keterampilan di Era Digital", year: "2024 (No. 14-061/2024)" },
+        { name: "Dosen dan Karier Berkelanjutan di Dunia Global", year: "2024 (No. 142-060/2024)" }
+      ],
+      description: {
+        en: "Professional development seminars on emerging technology adaptation, digital industry skills demands, and sustainable engineering careers.",
+        id: "Seminar pengembangan profesional mengenai adaptasi teknologi terkini, kebutuhan keahlian industri digital, dan pengembangan karier rekayasa berkelanjutan."
+      },
+      topics: ["Emerging Technologies", "Digital Skills", "Industry Trends"]
     }
   ],
 

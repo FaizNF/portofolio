@@ -49,6 +49,14 @@
   - Connected remote origin `https://github.com/FaizNF/portofolio.git`.
   - Pushed initial `main` branch upstream to GitHub.
 
+- [2026-10-17 08:55] — Certificate Extraction & Expanded Credentials
+  - Extracted certificates from `D:\Faiz\data diri\sertifikat` (MSIB 7, Kemnaker, 10 Gunadarma technical certs, and industrial seminars).
+  - Added new featured engineering project: `ATLAS: Smart Autonomous Transplanter for Sustainable Agriculture` (MSIB 7 Kampus Merdeka Top 8 Favourite Winner, IPK 3.96/4.00 across 20 SKS).
+  - Integrated 10 verified Gunadarma certificates with registration numbers (LAN Nirkabel, Optimalisasi Jaringan, Pelacakan Kerusakan, Mikrokontroler, Drone, Keamanan Jaringan, dll).
+  - Added official PDF download buttons in credential cards and modal dialogs (`assets/certs/`).
+  - Re-compiled production CSS and verified all 17 automated tests passing.
+
+
 
 
 
