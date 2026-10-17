@@ -56,6 +56,18 @@
   - Added official PDF download buttons in credential cards and modal dialogs (`assets/certs/`).
   - Re-compiled production CSS and verified all 17 automated tests passing.
 
+- [2026-10-17 09:10] — Purposeful Animation System & Micro-Interactions (Anti-Slop Standard)
+  - Implemented high-performance IntersectionObserver-driven scroll reveal animations (`.reveal`, `.is-revealed`) with staggered timing (`.stagger-1` to `.stagger-4`).
+  - Added CSS keyframe hero entrance animations (`@keyframes heroEntrance`) with crisp cubic-bezier timing (`cubic-bezier(0.16, 1, 0.3, 1)`).
+  - Enhanced cards with snappy spring hover elevation (`transform: translateY(-3px)` + border illumination).
+  - Added button press physics (`.btn-press:active { transform: scale(0.97) }`) and link arrow translation (`.arrow-hover`).
+  - Implemented active navbar link tracking (ScrollSpy) with smooth underline indicator.
+  - Added Vue transition wrappers for credential modal (backdrop fade + dialog scale-in) and mobile navigation dropdown.
+  - Added floating Back-to-Top button that reveals dynamically when scrolling past 450px with smooth scroll.
+  - Implemented full `@media (prefers-reduced-motion: reduce)` accessibility fallback.
+  - Recompiled production Tailwind CSS and verified all 17/17 tests passing.
+
+
 
 
 

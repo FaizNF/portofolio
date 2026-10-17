@@ -81,13 +81,13 @@
 
         <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-neutral-600 dark:text-neutral-400">
-          <a href="#about" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.about }}</a>
-          <a href="#experience" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.experience }}</a>
-          <a href="#projects" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.projects }}</a>
-          <a href="#certifications" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.certifications }}</a>
-          <a href="#skills" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.skills }}</a>
-          <a href="#education" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.education }}</a>
-          <a href="#contact" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">{{ t.nav.contact }}</a>
+          <a href="#about" class="nav-link hover:text-neutral-900 dark:hover:text-neutral-100" :class="{ 'active-nav': activeSection === 'about' }">{{ t.nav.about }}</a>
+          <a href="#projects" class="nav-link hover:text-neutral-900 dark:hover:text-neutral-100" :class="{ 'active-nav': activeSection === 'projects' }">{{ t.nav.projects }}</a>
+          <a href="#experience" class="nav-link hover:text-neutral-900 dark:hover:text-neutral-100" :class="{ 'active-nav': activeSection === 'experience' }">{{ t.nav.experience }}</a>
+          <a href="#certifications" class="nav-link hover:text-neutral-900 dark:hover:text-neutral-100" :class="{ 'active-nav': activeSection === 'certifications' }">{{ t.nav.certifications }}</a>
+          <a href="#skills" class="nav-link hover:text-neutral-900 dark:hover:text-neutral-100" :class="{ 'active-nav': activeSection === 'skills' }">{{ t.nav.skills }}</a>
+          <a href="#education" class="nav-link hover:text-neutral-900 dark:hover:text-neutral-100" :class="{ 'active-nav': activeSection === 'education' }">{{ t.nav.education }}</a>
+          <a href="#contact" class="nav-link hover:text-neutral-900 dark:hover:text-neutral-100" :class="{ 'active-nav': activeSection === 'contact' }">{{ t.nav.contact }}</a>
         </nav>
 
         <!-- Controls: Language, Theme, & CV CTA -->
@@ -97,13 +97,13 @@
             <button 
               @click="setLang('en')" 
               :class="currentLang === 'en' ? 'bg-white dark:bg-neutral-800 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'"
-              class="px-2 py-1 rounded transition-all">
+              class="px-2 py-1 rounded transition-all btn-press">
               EN
             </button>
             <button 
               @click="setLang('id')" 
               :class="currentLang === 'id' ? 'bg-white dark:bg-neutral-800 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'"
-              class="px-2 py-1 rounded transition-all">
+              class="px-2 py-1 rounded transition-all btn-press">
               ID
             </button>
           </div>
@@ -111,7 +111,7 @@
           <!-- Dark / Light Mode Toggle -->
           <button 
             @click="toggleTheme" 
-            class="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+            class="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors btn-press"
             :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
             <!-- Sun Icon -->
             <svg v-if="isDark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
@@ -123,7 +123,7 @@
           <a 
             :href="currentCvFile" 
             download 
-            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition-colors">
+            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition-colors btn-press">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             <span>{{ t.nav.downloadCv }}</span>
           </a>
@@ -131,26 +131,28 @@
           <!-- Mobile Hamburger Toggle -->
           <button 
             @click="mobileMenuOpen = !mobileMenuOpen" 
-            class="md:hidden p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400">
+            class="md:hidden p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 btn-press">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
         </div>
       </div>
 
-      <!-- Mobile Dropdown Navigation -->
-      <div v-if="mobileMenuOpen" class="md:hidden border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-4 py-3 space-y-2">
-        <a @click="mobileMenuOpen = false" href="#about" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.about }}</a>
-        <a @click="mobileMenuOpen = false" href="#experience" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.experience }}</a>
-        <a @click="mobileMenuOpen = false" href="#projects" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.projects }}</a>
-        <a @click="mobileMenuOpen = false" href="#certifications" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.certifications }}</a>
-        <a @click="mobileMenuOpen = false" href="#skills" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.skills }}</a>
-        <a @click="mobileMenuOpen = false" href="#education" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.education }}</a>
-        <a @click="mobileMenuOpen = false" href="#contact" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.contact }}</a>
-        <div class="pt-2 border-t border-neutral-200 dark:border-neutral-800 flex gap-2">
-          <a :href="data.profile.cvFiles.en" download class="flex-1 text-center py-2 text-xs font-semibold rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white">CV (EN)</a>
-          <a :href="data.profile.cvFiles.id" download class="flex-1 text-center py-2 text-xs font-semibold rounded bg-blue-600 text-white">CV (ID)</a>
+      <!-- Mobile Dropdown Navigation with Smooth Transition -->
+      <transition enter-active-class="transition duration-200 ease-out" enter-from-class="opacity-0 -translate-y-2" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition duration-150 ease-in" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 -translate-y-2">
+        <div v-if="mobileMenuOpen" class="md:hidden border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-4 py-3 space-y-2">
+          <a @click="mobileMenuOpen = false" href="#about" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.about }}</a>
+          <a @click="mobileMenuOpen = false" href="#projects" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.projects }}</a>
+          <a @click="mobileMenuOpen = false" href="#experience" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.experience }}</a>
+          <a @click="mobileMenuOpen = false" href="#certifications" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.certifications }}</a>
+          <a @click="mobileMenuOpen = false" href="#skills" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.skills }}</a>
+          <a @click="mobileMenuOpen = false" href="#education" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.education }}</a>
+          <a @click="mobileMenuOpen = false" href="#contact" class="block py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300">{{ t.nav.contact }}</a>
+          <div class="pt-2 border-t border-neutral-200 dark:border-neutral-800 flex gap-2">
+            <a :href="data.profile.cvFiles.en" download class="flex-1 text-center py-2 text-xs font-semibold rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white">CV (EN)</a>
+            <a :href="data.profile.cvFiles.id" download class="flex-1 text-center py-2 text-xs font-semibold rounded bg-blue-600 text-white">CV (ID)</a>
+          </div>
         </div>
-      </div>
+      </transition>
     </header>
 
     <!-- Main Content Flow -->
@@ -161,51 +163,51 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           
           <!-- Availability Badge -->
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 text-xs font-mono font-medium mb-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 text-xs font-mono font-medium mb-6 animate-hero-1">
             <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-indicator"></span>
             <span>{{ data.profile.statusBadge[currentLang] }}</span>
           </div>
 
           <!-- Main Header & Headline -->
           <div class="max-w-3xl">
-            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white mb-4 leading-tight">
+            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white mb-4 leading-tight animate-hero-2">
               Faiz Nur Fakhri<span class="text-neutral-400 font-light text-2xl sm:text-3xl">, S.Kom.</span>
             </h1>
-            <p class="text-lg sm:text-xl font-medium text-blue-600 dark:text-blue-400 mb-6">
+            <p class="text-lg sm:text-xl font-medium text-blue-600 dark:text-blue-400 mb-6 animate-hero-3">
               {{ data.profile.title[currentLang] }} — <span class="text-neutral-600 dark:text-neutral-400 font-normal">{{ data.profile.subtitle[currentLang] }}</span>
             </p>
-            <p class="text-neutral-700 dark:text-neutral-300 leading-relaxed text-sm sm:text-base mb-8">
+            <p class="text-neutral-700 dark:text-neutral-300 leading-relaxed text-sm sm:text-base mb-8 animate-hero-4">
               {{ data.profile.summary[currentLang] }}
             </p>
 
             <!-- Quick Action Buttons -->
-            <div class="flex flex-wrap items-center gap-3 mb-10">
-              <a href="#contact" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-all">
+            <div class="flex flex-wrap items-center gap-3 mb-10 animate-hero-5">
+              <a href="#contact" class="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-all btn-press">
                 <span>{{ t.hero.ctaPrimary }}</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                <svg class="w-4 h-4 arrow-hover" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
               </a>
 
               <!-- Dual CV Download Buttons -->
               <div class="inline-flex rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 shadow-sm overflow-hidden">
-                <a :href="data.profile.cvFiles.en" href="Faiz_Nur_Fakhri_CV.pdf" download class="inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors border-r border-neutral-200 dark:border-neutral-800">
+                <a :href="data.profile.cvFiles.en" href="Faiz_Nur_Fakhri_CV.pdf" download class="inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors border-r border-neutral-200 dark:border-neutral-800 btn-press">
                   <svg class="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                   <span>{{ t.hero.verifiedCvEn }}</span>
                 </a>
-                <a :href="data.profile.cvFiles.id" href="CV_Faiz_Nur_Fakhri_ID.pdf" download class="inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+                <a :href="data.profile.cvFiles.id" href="CV_Faiz_Nur_Fakhri_ID.pdf" download class="inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors btn-press">
                   <svg class="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                   <span>{{ t.hero.verifiedCvId }}</span>
                 </a>
               </div>
 
               <!-- Quick Copy Email Button -->
-              <button @click="copyText(data.profile.email, 'Email')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs sm:text-sm font-medium transition-colors">
+              <button @click="copyText(data.profile.email, 'Email')" class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs sm:text-sm font-medium transition-colors btn-press">
                 <svg class="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                 <span>{{ t.hero.quickCopyEmail }}</span>
               </button>
             </div>
 
             <!-- Location & Contact Badges -->
-            <div class="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-mono text-neutral-700 dark:text-neutral-300 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+            <div class="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-mono text-neutral-700 dark:text-neutral-300 pt-4 border-t border-neutral-200 dark:border-neutral-800 animate-hero-5">
               <div class="flex items-center gap-1.5">
                 <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 <span>{{ data.profile.location[currentLang] }}</span>
@@ -222,9 +224,9 @@
 
           </div>
 
-          <!-- Highlights Dossier Grid -->
+          <!-- Highlights Dossier Grid with Staggered Scroll Reveal -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-            <div v-for="(h, idx) in data.profile.highlights" :key="idx" class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-sm interactive-card">
+            <div v-for="(h, idx) in data.profile.highlights" :key="idx" :class="'stagger-' + ((idx % 4) + 1)" class="reveal p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-sm interactive-card">
               <div class="font-mono text-2xl font-bold tracking-tight text-neutral-900 dark:text-white mb-1">
                 {{ h.metric }}
               </div>
@@ -236,7 +238,6 @@
               </p>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -244,7 +245,7 @@
       <section id="projects" class="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           
-          <div class="max-w-2xl mb-12">
+          <div class="max-w-2xl mb-12 reveal">
             <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
               01 // {{ t.projects.title }}
             </div>
@@ -258,7 +259,7 @@
 
           <!-- Dynamic Projects List -->
           <div class="space-y-8">
-            <div v-for="(proj, pIdx) in data.projects" :key="proj.id" class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 p-6 sm:p-8">
+            <div v-for="(proj, pIdx) in data.projects" :key="proj.id" class="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 p-6 sm:p-8 reveal interactive-card">
               <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-neutral-800">
                 <div>
                   <span class="inline-block px-2.5 py-1 rounded bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-mono text-xs font-semibold mb-2">
@@ -301,28 +302,28 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 hover:border-blue-500/40 hover:bg-white dark:hover:bg-neutral-900 transition-all">
                     <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">1. Frontend Layer</div>
                     <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Vue.js SPA Modules</div>
                     <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
                       Dynamic borrowing forms, responsive inventory tables, and instant approval action toggles.
                     </p>
                   </div>
-                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 hover:border-blue-500/40 hover:bg-white dark:hover:bg-neutral-900 transition-all">
                     <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">2. Gateway & Auth</div>
                     <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Laravel Middleware</div>
                     <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
                       Strict RBAC checking, form request sanitation, and RESTful route orchestration.
                     </p>
                   </div>
-                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 hover:border-blue-500/40 hover:bg-white dark:hover:bg-neutral-900 transition-all">
                     <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">3. Domain Logic</div>
                     <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Approval Engine</div>
                     <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
                       Real-time stock audit trails, transactional borrowing logs, multi-tier approvals.
                     </p>
                   </div>
-                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60">
+                  <div class="arch-node p-3.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 hover:border-blue-500/40 hover:bg-white dark:hover:bg-neutral-900 transition-all">
                     <div class="font-mono font-bold text-neutral-900 dark:text-white mb-1">4. Persistence</div>
                     <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">MySQL Database</div>
                     <p class="text-neutral-600 dark:text-neutral-400 text-[11px] leading-snug">
@@ -347,7 +348,7 @@
 
               <!-- Tech Tags -->
               <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-2">
-                <span v-for="t in proj.technologies" :key="t" class="px-2.5 py-1 rounded bg-neutral-200/80 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs font-medium">
+                <span v-for="t in proj.technologies" :key="t" class="px-2.5 py-1 rounded bg-neutral-200/80 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs font-medium hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors">
                   {{ t }}
                 </span>
               </div>
@@ -361,7 +362,7 @@
       <section id="experience" class="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/30">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           
-          <div class="max-w-2xl mb-12">
+          <div class="max-w-2xl mb-12 reveal">
             <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
               02 // {{ t.experience.title }}
             </div>
@@ -374,7 +375,7 @@
           </div>
 
           <div class="space-y-8">
-            <div v-for="(job, jIdx) in data.workExperience" :key="jIdx" class="p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 interactive-card">
+            <div v-for="(job, jIdx) in data.workExperience" :key="jIdx" class="p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 reveal interactive-card">
               
               <div class="flex flex-wrap items-baseline justify-between gap-2 mb-4">
                 <div>
@@ -420,7 +421,7 @@
       <section id="certifications" class="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           
-          <div class="max-w-2xl mb-12">
+          <div class="max-w-2xl mb-12 reveal">
             <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
               03 // {{ t.certifications.title }}
             </div>
@@ -433,7 +434,7 @@
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div v-for="cert in data.certifications" :key="cert.id" class="flex flex-col justify-between p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 interactive-card">
+            <div v-for="cert in data.certifications" :key="cert.id" class="flex flex-col justify-between p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 reveal interactive-card">
               <div>
                 <!-- Top Verified Badge -->
                 <div class="flex items-center justify-between gap-2 mb-4">
@@ -473,10 +474,10 @@
 
               <!-- Action buttons -->
               <div class="mt-4 pt-3 border-t border-neutral-200/60 dark:border-neutral-800/60 flex items-center gap-2">
-                <button @click="openCertModal(cert)" class="flex-1 py-2 px-3 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:border-blue-600 dark:hover:border-blue-400 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-medium transition-colors text-center">
+                <button @click="openCertModal(cert)" class="flex-1 py-2 px-3 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:border-blue-600 dark:hover:border-blue-400 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 text-xs font-medium transition-colors text-center btn-press">
                   {{ t.certifications.viewDetails }}
                 </button>
-                <a v-if="cert.pdfFile" :href="cert.pdfFile" target="_blank" download class="py-2 px-3 rounded-lg bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-blue-600 dark:text-blue-400 text-xs font-semibold flex items-center gap-1 transition-colors" title="Download Document">
+                <a v-if="cert.pdfFile" :href="cert.pdfFile" target="_blank" download class="py-2 px-3 rounded-lg bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-blue-600 dark:text-blue-400 text-xs font-semibold flex items-center gap-1 transition-colors btn-press" title="Download Document">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                   <span>PDF</span>
                 </a>
@@ -491,7 +492,7 @@
       <section id="skills" class="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/30">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           
-          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 reveal">
             <div class="max-w-2xl">
               <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
                 04 // {{ t.skills.title }}
@@ -520,7 +521,7 @@
 
           <!-- Skills Grid -->
           <div v-if="filteredCategories.length > 0" class="space-y-8">
-            <div v-for="(cat, cIdx) in filteredCategories" :key="cIdx" class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+            <div v-for="(cat, cIdx) in filteredCategories" :key="cIdx" class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 reveal">
               <h3 class="text-sm font-mono font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-4 pb-2 border-b border-neutral-100 dark:border-neutral-800">
                 {{ cat.name[currentLang] }}
               </h3>
@@ -570,7 +571,7 @@
       <section id="education" class="py-16 sm:py-20 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           
-          <div class="max-w-2xl mb-12">
+          <div class="max-w-2xl mb-12 reveal">
             <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
               05 // {{ t.education.title }}
             </div>
@@ -582,7 +583,7 @@
             </p>
           </div>
 
-          <div class="p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/60">
+          <div class="p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/60 reveal interactive-card">
             <div class="flex flex-wrap items-baseline justify-between gap-3 mb-6 pb-6 border-b border-neutral-200 dark:border-neutral-800">
               <div>
                 <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-1">
@@ -617,7 +618,7 @@
                 {{ t.education.courseworkTitle }}
               </h4>
               <div class="flex flex-wrap gap-2">
-                <span v-for="c in data.education.coursework[currentLang]" :key="c" class="px-2.5 py-1 rounded-lg bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-300">
+                <span v-for="c in data.education.coursework[currentLang]" :key="c" class="px-2.5 py-1 rounded-lg bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:border-blue-500/40 transition-colors">
                   {{ c }}
                 </span>
               </div>
@@ -632,7 +633,7 @@
       <section id="contact" class="py-16 sm:py-24 bg-neutral-50 dark:bg-neutral-900/50">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           
-          <div class="max-w-2xl mb-12">
+          <div class="max-w-2xl mb-12 reveal">
             <div class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-2">
               06 // {{ t.contact.title }}
             </div>
@@ -647,8 +648,8 @@
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             <!-- Left Column: Direct Info & Quick Actions -->
-            <div class="lg:col-span-5 space-y-4">
-              <div class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+            <div class="lg:col-span-5 space-y-4 reveal">
+              <div class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 interactive-card">
                 <h3 class="text-sm font-mono font-bold uppercase tracking-wider text-neutral-500 mb-4">
                   {{ t.contact.orDirect }}
                 </h3>
@@ -661,7 +662,7 @@
                       {{ data.profile.email }}
                     </a>
                   </div>
-                  <button @click="copyText(data.profile.email, 'Email')" class="p-2 rounded border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-xs text-neutral-700 dark:text-neutral-300 shrink-0" title="Copy Email">
+                  <button @click="copyText(data.profile.email, 'Email')" class="p-2 rounded border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-xs text-neutral-700 dark:text-neutral-300 shrink-0 btn-press" title="Copy Email">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                   </button>
                 </div>
@@ -674,17 +675,17 @@
                       {{ data.profile.phone }}
                     </a>
                   </div>
-                  <button @click="copyText(data.profile.phone, 'Phone number')" class="p-2 rounded border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-xs text-neutral-700 dark:text-neutral-300 shrink-0" title="Copy Phone">
+                  <button @click="copyText(data.profile.phone, 'Phone number')" class="p-2 rounded border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-xs text-neutral-700 dark:text-neutral-300 shrink-0 btn-press" title="Copy Phone">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                   </button>
                 </div>
 
                 <!-- Direct Links -->
                 <div class="grid grid-cols-2 gap-2 pt-2">
-                  <a :href="data.profile.socials.whatsapp" target="_blank" rel="noopener" class="py-2.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold text-center transition-colors">
+                  <a :href="data.profile.socials.whatsapp" target="_blank" rel="noopener" class="py-2.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold text-center transition-colors btn-press">
                     {{ t.contact.whatsappBtn }}
                   </a>
-                  <a :href="'tel:' + data.profile.phone" class="py-2.5 px-3 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 text-xs font-semibold text-center transition-colors">
+                  <a :href="'tel:' + data.profile.phone" class="py-2.5 px-3 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 text-xs font-semibold text-center transition-colors btn-press">
                     {{ t.contact.phoneBtn }}
                   </a>
                 </div>
@@ -698,8 +699,8 @@
             </div>
 
             <!-- Right Column: Direct Message Composer -->
-            <div class="lg:col-span-7">
-              <form @submit.prevent="handleContactSubmit" class="p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 space-y-4">
+            <div class="lg:col-span-7 reveal">
+              <form @submit.prevent="handleContactSubmit" class="p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 space-y-4 interactive-card">
                 
                 <div>
                   <label class="block text-xs font-mono font-medium text-neutral-600 dark:text-neutral-400 mb-1.5">
@@ -750,9 +751,9 @@
 
                 <button 
                   type="submit" 
-                  class="w-full py-3 px-5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm transition-colors flex items-center justify-center gap-2">
+                  class="w-full py-3 px-5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm transition-colors flex items-center justify-center gap-2 btn-press group">
                   <span>{{ t.contact.sendBtn }}</span>
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  <svg class="w-4 h-4 arrow-hover" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </button>
 
               </form>
@@ -765,58 +766,78 @@
 
     </main>
 
-    <!-- CREDENTIAL DETAILS MODAL -->
-    <div v-if="selectedCert" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" @click.self="closeCertModal">
-      <div class="w-full max-w-lg p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl relative">
-        
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <div>
-            <span class="inline-block px-2 py-0.5 rounded font-mono text-[10px] uppercase font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 mb-1">
-              {{ t.modal.certDetails }}
-            </span>
-            <h3 class="text-lg font-bold text-neutral-900 dark:text-white">
-              {{ selectedCert.title[currentLang] }}
-            </h3>
-          </div>
-          <button @click="closeCertModal" class="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 text-lg">✕</button>
-        </div>
-
-        <div class="space-y-4 my-4 text-xs sm:text-sm">
-          <div class="p-3 rounded-lg bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 font-mono text-xs">
-            <div class="text-neutral-400 uppercase text-[10px] mb-0.5">Issuing Authority</div>
-            <div class="font-semibold text-neutral-800 dark:text-neutral-200">{{ selectedCert.issuer }}</div>
-            <div class="text-neutral-500 mt-1">Validity / Status: {{ selectedCert.period }} ({{ selectedCert.regNo }})</div>
-          </div>
-
-          <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed">
-            {{ selectedCert.description[currentLang] }}
-          </p>
-
-          <div v-if="selectedCert.topics">
-            <div class="font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-2">
-              {{ t.modal.competencyAreas }}
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              <span v-for="top in selectedCert.topics" :key="top" class="px-2.5 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs">
-                ✓ {{ top }}
+    <!-- CREDENTIAL DETAILS MODAL WITH SPRING TRANSITION -->
+    <transition 
+      enter-active-class="transition duration-200 ease-out" 
+      enter-from-class="opacity-0" 
+      enter-to-class="opacity-100" 
+      leave-active-class="transition duration-150 ease-in" 
+      leave-from-class="opacity-100" 
+      leave-to-class="opacity-0">
+      <div v-if="selectedCert" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" @click.self="closeCertModal">
+        <div class="w-full max-w-lg p-6 sm:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl relative transition-all duration-200 transform scale-100">
+          
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div>
+              <span class="inline-block px-2 py-0.5 rounded font-mono text-[10px] uppercase font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 mb-1">
+                {{ t.modal.certDetails }}
               </span>
+              <h3 class="text-lg font-bold text-neutral-900 dark:text-white">
+                {{ selectedCert.title[currentLang] }}
+              </h3>
+            </div>
+            <button @click="closeCertModal" class="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 text-lg btn-press">✕</button>
+          </div>
+
+          <div class="space-y-4 my-4 text-xs sm:text-sm">
+            <div class="p-3 rounded-lg bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 font-mono text-xs">
+              <div class="text-neutral-400 uppercase text-[10px] mb-0.5">Issuing Authority</div>
+              <div class="font-semibold text-neutral-800 dark:text-neutral-200">{{ selectedCert.issuer }}</div>
+              <div class="text-neutral-500 mt-1">Validity / Status: {{ selectedCert.period }} ({{ selectedCert.regNo }})</div>
+            </div>
+
+            <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+              {{ selectedCert.description[currentLang] }}
+            </p>
+
+            <div v-if="selectedCert.topics">
+              <div class="font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-2">
+                {{ t.modal.competencyAreas }}
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <span v-for="top in selectedCert.topics" :key="top" class="px-2.5 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs">
+                  ✓ {{ top }}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between gap-3">
-          <a v-if="selectedCert.pdfFile" :href="selectedCert.pdfFile" target="_blank" download class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition-colors">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            <span>{{ currentLang === 'en' ? 'Download Official Certificate PDF' : 'Unduh Dokumen PDF Resmi' }}</span>
-          </a>
-          <div v-else></div>
-          <button @click="closeCertModal" class="py-2 px-4 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold">
-            {{ t.modal.close }}
-          </button>
-        </div>
+          <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between gap-3">
+            <a v-if="selectedCert.pdfFile" :href="selectedCert.pdfFile" target="_blank" download class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition-colors btn-press">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>{{ currentLang === 'en' ? 'Download Official Certificate PDF' : 'Unduh Dokumen PDF Resmi' }}</span>
+            </a>
+            <div v-else></div>
+            <button @click="closeCertModal" class="py-2 px-4 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold btn-press">
+              {{ t.modal.close }}
+            </button>
+          </div>
 
+        </div>
       </div>
-    </div>
+    </transition>
+
+    <!-- Floating Back-to-Top Button -->
+    <transition enter-active-class="transition duration-300 ease-out" enter-from-class="opacity-0 translate-y-6 scale-90" enter-to-class="opacity-100 translate-y-0 scale-100" leave-active-class="transition duration-200 ease-in" leave-from-class="opacity-100 translate-y-0 scale-100" leave-to-class="opacity-0 translate-y-6 scale-90">
+      <button 
+        v-if="showBackToTop" 
+        @click="scrollToTop" 
+        class="fixed bottom-6 left-6 z-40 p-2.5 sm:px-3.5 sm:py-2 rounded-xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 shadow-lg back-to-top-btn flex items-center gap-2 text-xs font-mono font-medium hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none"
+        title="Scroll to top">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+        <span class="hidden sm:inline">{{ t.footer.backToTop }}</span>
+      </button>
+    </transition>
 
     <!-- FOOTER -->
     <footer class="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 py-10 transition-colors">

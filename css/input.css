@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .font-mono-spec {
@@ -79,13 +79,149 @@ body {
   animation: pulse-subtle 2.5s infinite ease-in-out;
 }
 
-/* Interactive Card Transitions */
+/* Hero Entrance Keyframes (Fast, crisp, staggered entry) */
+@keyframes heroEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-1 {
+  animation: heroEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+.animate-hero-2 {
+  animation: heroEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+.animate-hero-3 {
+  animation: heroEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+.animate-hero-4 {
+  animation: heroEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+.animate-hero-5 {
+  animation: heroEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+/* High-Performance Scroll Reveal (Intersection Observer driven) */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-1 { transition-delay: 80ms; }
+.stagger-2 { transition-delay: 160ms; }
+.stagger-3 { transition-delay: 240ms; }
+.stagger-4 { transition-delay: 320ms; }
+
+/* Interactive Cards - Snappy Spring Elevation */
 .interactive-card {
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.2s ease, 
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
 }
 
 .interactive-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.07), 0 4px 10px -4px rgba(0, 0, 0, 0.03);
+}
+
+.dark .interactive-card:hover {
+  box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.5);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.interactive-card:active {
+  transform: translateY(-1px);
+}
+
+/* Button & Control Micro-Physics */
+.btn-press {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Arrow Hover Translation */
+.arrow-hover {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .arrow-hover {
+  transform: translate(2px, -2px);
+}
+
+/* Active Navigation Underline & Tracking */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #2563eb;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 9999px;
+}
+
+.dark .nav-link::after {
+  background-color: #60a5fa;
+}
+
+.nav-link.active-nav {
+  color: #2563eb !important;
+}
+
+.dark .nav-link.active-nav {
+  color: #60a5fa !important;
+}
+
+.nav-link.active-nav::after {
+  width: 100%;
+}
+
+/* Skill Tag / Filter Transitions */
+.skill-pill-enter-active,
+.skill-pill-leave-active {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.skill-pill-enter-from,
+.skill-pill-leave-to {
+  opacity: 0;
+  transform: scale(0.94);
+}
+
+/* Floating Back to Top Button */
+.back-to-top-btn {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, background-color 0.15s ease, box-shadow 0.25s ease;
+}
+
+.back-to-top-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.25);
+}
+
+.back-to-top-btn:active {
+  transform: translateY(-1px) scale(0.95);
 }
 
 /* Toast Notification Animation */
@@ -102,6 +238,25 @@ body {
 
 .animate-slide-in {
   animation: slide-in-bottom 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Respect Prefers-Reduced-Motion (Pillar 4 & Accessibility) */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .animate-hero-1, .animate-hero-2, .animate-hero-3, .animate-hero-4, .animate-hero-5 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Print Optimization */

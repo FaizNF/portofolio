@@ -2,7 +2,7 @@ import { portfolioData } from './data.js';
 
 // Standalone Vue 3 Composition API application
 export function initPortfolio(Vue) {
-  const { createApp, ref, computed, onMounted, watch } = Vue;
+  const { createApp, ref, computed, onMounted, watch, nextTick } = Vue;
 
   createApp({
     setup() {
@@ -24,6 +24,8 @@ export function initPortfolio(Vue) {
       const searchQuery = ref('');
       const toast = ref({ show: false, message: '' });
       let toastTimer = null;
+      const activeSection = ref('about');
+      const showBackToTop = ref(false);
 
       // Contact form state
       const contactForm = ref({
@@ -224,6 +226,60 @@ export function initPortfolio(Vue) {
         };
       });
 
+      // Smooth scroll to top
+      const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      };
+
+      // Scroll-triggered reveal animations via Intersection Observer
+      const initScrollReveal = () => {
+        if (typeof window === 'undefined') return;
+        if (!('IntersectionObserver' in window)) {
+          document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-revealed'));
+          return;
+        }
+
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {
+          rootMargin: '0px 0px -40px 0px',
+          threshold: 0.08
+        });
+
+        document.querySelectorAll('.reveal:not(.is-revealed)').forEach(el => observer.observe(el));
+      };
+
+      // Scroll spy for active navbar section
+      const initScrollSpy = () => {
+        const sections = ['about', 'projects', 'experience', 'certifications', 'skills', 'education', 'contact'];
+        const handleScroll = () => {
+          const scrollPosition = window.scrollY;
+          showBackToTop.value = scrollPosition > 450;
+
+          for (let i = sections.length - 1; i >= 0; i--) {
+            const sec = document.getElementById(sections[i]);
+            if (sec) {
+              const top = sec.offsetTop - 120;
+              if (scrollPosition >= top) {
+                activeSection.value = sections[i];
+                break;
+              }
+            }
+          }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+      };
+
       onMounted(() => {
         applyTheme(isDark.value);
         // Sync system preference changes
@@ -232,6 +288,19 @@ export function initPortfolio(Vue) {
             isDark.value = e.matches;
             applyTheme(e.matches);
           }
+        });
+
+        // Initialize animations on mount
+        nextTick(() => {
+          initScrollReveal();
+          initScrollSpy();
+        });
+      });
+
+      // Re-observe dynamic content on filter / language changes
+      watch([currentLang, searchQuery], () => {
+        nextTick(() => {
+          initScrollReveal();
         });
       });
 
@@ -244,6 +313,9 @@ export function initPortfolio(Vue) {
         searchQuery,
         toast,
         contactForm,
+        activeSection,
+        showBackToTop,
+        scrollToTop,
         toggleTheme,
         setLang,
         showToast,
